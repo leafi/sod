@@ -1,0 +1,9 @@
+C:\Users\leaf\Desktop\sod\SharpGL\Core\SharpGL.Serialization\bin\Debug\SharpGL.Serialization.dll
+C:\Users\leaf\Desktop\sod\SharpGL\Core\SharpGL.Serialization\bin\Debug\SharpGL.Serialization.pdb
+C:\Users\leaf\Desktop\sod\SharpGL\Core\SharpGL.Serialization\bin\Debug\SharpGL.dll
+C:\Users\leaf\Desktop\sod\SharpGL\Core\SharpGL.Serialization\bin\Debug\SharpGL.SceneGraph.dll
+C:\Users\leaf\Desktop\sod\SharpGL\Core\SharpGL.Serialization\bin\Debug\SharpGL.SceneGraph.pdb
+C:\Users\leaf\Desktop\sod\SharpGL\Core\SharpGL.Serialization\bin\Debug\SharpGL.pdb
+C:\Users\leaf\Desktop\sod\SharpGL\Core\SharpGL.Serialization\obj\Debug\SharpGL.Serialization.csprojResolveAssemblyReference.cache
+C:\Users\leaf\Desktop\sod\SharpGL\Core\SharpGL.Serialization\obj\Debug\SharpGL.Serialization.dll
+C:\Users\leaf\Desktop\sod\SharpGL\Core\SharpGL.Serialization\obj\Debug\SharpGL.Serialization.pdb

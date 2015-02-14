@@ -1,4 +1,19 @@
 *.suo
 sod/bin/
 sod/obj/
+packages/
+SharpDX.WPF/bin/
+SharpDX.WPF/obj/
+SharpGL/Core/SharpGL.WPF/bin/
+SharpGL/Core/SharpGL.WPF/obj/
+SharpGL/Core/SharpGL.SceneGraph/bin/
+SharpGL/Core/SharpGL.SceneGraph/obj/
+SharpGL/Core/SharpGL/bin/
+SharpGL/Core/SharpGL/obj/
+sod.D3D11/bin/
+sod.WPF/bin/
+sod.D3D11/obj/
+sod.WPF/obj/
+sod.XInput/bin/
+sod.XInput/obj/
 

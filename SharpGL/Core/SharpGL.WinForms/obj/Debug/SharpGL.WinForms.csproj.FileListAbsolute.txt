@@ -1,0 +1,14 @@
+C:\Users\leaf\Desktop\sod\SharpGL\Core\SharpGL.WinForms\bin\Debug\SharpGL.WinForms.dll
+C:\Users\leaf\Desktop\sod\SharpGL\Core\SharpGL.WinForms\bin\Debug\SharpGL.WinForms.pdb
+C:\Users\leaf\Desktop\sod\SharpGL\Core\SharpGL.WinForms\bin\Debug\SharpGL.dll
+C:\Users\leaf\Desktop\sod\SharpGL\Core\SharpGL.WinForms\bin\Debug\SharpGL.SceneGraph.dll
+C:\Users\leaf\Desktop\sod\SharpGL\Core\SharpGL.WinForms\bin\Debug\SharpGL.SceneGraph.pdb
+C:\Users\leaf\Desktop\sod\SharpGL\Core\SharpGL.WinForms\bin\Debug\SharpGL.pdb
+C:\Users\leaf\Desktop\sod\SharpGL\Core\SharpGL.WinForms\obj\Debug\SharpGL.WinForms.csprojResolveAssemblyReference.cache
+C:\Users\leaf\Desktop\sod\SharpGL\Core\SharpGL.WinForms\obj\Debug\SharpGL.Controls.GLColourPicker.resources
+C:\Users\leaf\Desktop\sod\SharpGL\Core\SharpGL.WinForms\obj\Debug\SharpGL.OpenGLControl.resources
+C:\Users\leaf\Desktop\sod\SharpGL\Core\SharpGL.WinForms\obj\Debug\SharpGL.SceneControl.resources
+C:\Users\leaf\Desktop\sod\SharpGL\Core\SharpGL.WinForms\obj\Debug\SharpGL.Controls.VertexControl.resources
+C:\Users\leaf\Desktop\sod\SharpGL\Core\SharpGL.WinForms\obj\Debug\SharpGL.WinForms.csproj.GenerateResource.Cache
+C:\Users\leaf\Desktop\sod\SharpGL\Core\SharpGL.WinForms\obj\Debug\SharpGL.WinForms.dll
+C:\Users\leaf\Desktop\sod\SharpGL\Core\SharpGL.WinForms\obj\Debug\SharpGL.WinForms.pdb
