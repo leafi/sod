@@ -1,6 +1,9 @@
 *.suo
+*.userprefs
 sod/bin/
 sod/obj/
+sod.Mac/bin/
+sod.Mac/obj/
 packages/
 SharpDX.WPF/bin/
 SharpDX.WPF/obj/

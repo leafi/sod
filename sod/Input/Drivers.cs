@@ -18,14 +18,14 @@ namespace sod.Input
 
     public static class Drivers
     {
-        public static List<IDriver> Drivers = new List<IDriver>();
+        public static List<IDriver> DDrivers = new List<IDriver>();
         public static IDriver Active { get; private set; }
 
 
 
         public static void Pick()
         {
-            Active = Drivers[0];
+            Active = DDrivers[0];
         }
     }
 }
