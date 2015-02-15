@@ -31,7 +31,7 @@ namespace sod.WPF
 
         static RenderBox.IRenderBox pickRenderBox()
         {
-            return sod.Graphics.Renderer.Active is sod.D3D11.Renderer ? (RenderBox.IRenderBox) new RenderBoxWPFD3DHandler() : new RenderBoxWPFOGLHandler();
+            return /*sod.Graphics.Renderer.Active is sod.D3D11.Renderer ? (RenderBox.IRenderBox) new RenderBoxWPFD3DHandler() :*/ new RenderBoxWPFOGLHandler();
         }
     }
 }
