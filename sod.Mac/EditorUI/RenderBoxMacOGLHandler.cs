@@ -37,7 +37,7 @@ namespace sod.Mac
             GL.ClearColor (0, 0, 0, 0);
             GL.Clear(ClearBufferMask.ColorBufferBit);
 
-            DrawTriangle ();
+            //DrawTriangle ();
 
             GL.Flush ();
         }
@@ -56,7 +56,10 @@ namespace sod.Mac
         public virtual NSOpenGLPixelFormatAttribute[] ChoosePixelFormat()
         {
             return new NSOpenGLPixelFormatAttribute[] {
-                NSOpenGLPixelFormatAttribute.MinimumPolicy
+                NSOpenGLPixelFormatAttribute.Accelerated,
+                NSOpenGLPixelFormatAttribute.OpenGLProfile, (NSOpenGLPixelFormatAttribute)0x3200,
+                NSOpenGLPixelFormatAttribute.ColorSize, (NSOpenGLPixelFormatAttribute)24,
+                NSOpenGLPixelFormatAttribute.AlphaSize, (NSOpenGLPixelFormatAttribute)8
             };
         }
 
