@@ -1,5 +1,6 @@
 *.suo
 *.userprefs
+*.user
 sod/bin/
 sod/obj/
 sod.Mac/bin/

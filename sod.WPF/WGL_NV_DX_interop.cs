@@ -10,22 +10,22 @@ namespace sod.WPF
 {
     public class WGL_NV_DX_interop
     {
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        [UnmanagedFunctionPointer(CallingConvention.StdCall)]
         public delegate System.Boolean wglDXSetResourceShareHandleNV(IntPtr dxObject, IntPtr shareHandle);
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        [UnmanagedFunctionPointer(CallingConvention.StdCall)]
         public delegate IntPtr wglDXOpenDeviceNV(IntPtr dxDevice);
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        [UnmanagedFunctionPointer(CallingConvention.StdCall)]
         public delegate System.Boolean wglDXCloseDeviceNV(IntPtr hDevice);
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        [UnmanagedFunctionPointer(CallingConvention.StdCall)]
         public delegate IntPtr wglDXRegisterObjectNV(IntPtr hDevice, IntPtr dxObject, uint name, uint typeEnum, uint accessEnum);
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        [UnmanagedFunctionPointer(CallingConvention.StdCall)]
         public delegate System.Boolean wglDXUnregisterObjectNV(IntPtr hDevice, IntPtr hObject);
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        [UnmanagedFunctionPointer(CallingConvention.StdCall)]
         public delegate System.Boolean wglDXObjectAccessNV(IntPtr hObject, uint accessEnum);
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate System.Boolean wglDXLockObjectsNV(IntPtr hDevice, int count, IntPtr hObjectsPtr);
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate System.Boolean wglDXUnlockObjectsNV(IntPtr hDevice, int count, IntPtr hObjectsPtr);
+        [UnmanagedFunctionPointer(CallingConvention.StdCall)]
+        public delegate System.Boolean wglDXLockObjectsNV(IntPtr hDevice, int count, IntPtr[] hObjectsPtr);
+        [UnmanagedFunctionPointer(CallingConvention.StdCall)]
+        public delegate System.Boolean wglDXUnlockObjectsNV(IntPtr hDevice, int count, IntPtr[] hObjectsPtr);
 
         public const uint WGL_ACCESS_READ_ONLY_NV = 0x0000;
         public const uint WGL_ACCESS_READ_WRITE_NV = 0x0001;
