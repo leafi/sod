@@ -162,8 +162,6 @@ namespace sod.WPF
             oglContext.LoadAll();
             nw.ProcessEvents();
 
-            GL.ClearColor(0f, 0f, 1f, 1f);
-
             createD3D9ExContext(); // needs OGL context set
 
             release();
@@ -192,24 +190,13 @@ namespace sod.WPF
         {
             RenderingEventArgs args = (RenderingEventArgs)e;
 
-            if (new Random().Next(5) > 3)
-                return;
-
             // OnRender may be called twice in the same frame. Only render the first time.
             if (d3dImage.IsFrontBufferAvailable && lastRenderTime != args.RenderingTime)
             {
-                // IntPtr pSurface = IntPtr.Zero;
-
-                // // !!! SET PSURFACE !!!
-
-
-
                 d3dImage.Lock();
                 d3dImage.SetBackBuffer(D3DResourceType.IDirect3DSurface9, colorBuffer.NativePointer);
 
-                // DEBUG: Clear D3D device to yellow. OpenGL *should* (must, surely - we're copying a different texture!) overwrite.
                 //device.Clear(ClearFlags.Target, new SharpDX.ColorBGRA(1f, 1f, 0f, 1f), 0f, 0);
-                
 
                 makeCurrent();
                 wgl.WglDXLockObjectsNV(wglHandleDevice, 1, singleWglHandleSharedSurfaceArray);
@@ -221,7 +208,7 @@ namespace sod.WPF
                 GL.MatrixMode(MatrixMode.Modelview);
                 GL.LoadIdentity();
                 GL.ClearColor(0f, 1f, 1f, 1f);
-                //GL.Clear(ClearBufferMask.ColorBufferBit);
+                GL.Clear(ClearBufferMask.ColorBufferBit);
                 GL.Begin(BeginMode.Triangles);
                 GL.Color3(127, 127, 127);
                 GL.Vertex2(100, 100);
