@@ -59,7 +59,7 @@ namespace sod.WPF
 
             nw = new NativeWindow();
             oglContext = new GraphicsContext(new GraphicsMode(), nw.WindowInfo, 3, 0, GraphicsContextFlags.Default);
-            oglContext.VSync = true;
+            //oglContext.VSync = true;
             // TODO: should we be repeatedly calling nw.ProcessEvents() // nw.Sleep() in a new thread?
         }
 
@@ -75,13 +75,14 @@ namespace sod.WPF
 
         DeviceEx device;
         Surface colorBuffer;
+        Surface sharedSurface;
 
         WGL_NV_DX_interop wgl;
 
         IntPtr wglHandleDevice;
-        int glColorBuffer;
-        IntPtr wglHandleColorBuffer;
-        IntPtr[] singleWglHandleColorBufferArray;
+        //int glColorBuffer;
+        //IntPtr wglHandleColorBuffer;
+        //IntPtr[] singleWglHandleColorBufferArray;
 
         int glSharedSurface;
         IntPtr wglHandleSharedSurface;
@@ -105,8 +106,11 @@ namespace sod.WPF
             colorBuffer = Surface.CreateRenderTargetEx(device, 400, 300, Format.A8R8G8B8, MultisampleType.None, 1, false, Usage.None, ref colorBufferShareHandle);
             var tex = new Texture(device, 400, 300, 1, Usage.RenderTarget, Format.A8R8G8B8, Pool.Default);
             colorBuffer = tex.GetSurfaceLevel(0);
+
+            IntPtr sharedSurfaceShareHandle = IntPtr.Zero;
+
             //IntPtr colorBufferShareHandle = IntPtr.Zero;
-            //colorBuffer = Surface.CreateOffscreenPlainEx(device, 400, 300, Format.A8R8G8B8, Pool.Default, Usage.Dynamic, ref colorBufferShareHandle);
+            sharedSurface = Surface.CreateOffscreenPlainEx(device, 400, 300, Format.A8R8G8B8, Pool.Default, Usage.None, ref sharedSurfaceShareHandle);
             //Console.WriteLine("ColorBufferShareHandle: " + colorBufferShareHandle.ToInt64());
             
             
@@ -114,27 +118,28 @@ namespace sod.WPF
             wgl = new WGL_NV_DX_interop();
             wglHandleDevice = wgl.WglDXOpenDeviceNV(device.NativePointer);
 
-            glColorBuffer = GL.GenTexture();
+            glSharedSurface = GL.GenTexture();
             //glColorBuffer = GL.GenFramebuffer();
 
             var fbo = GL.GenFramebuffer();
 
             //Surface.CreateOffscreenPlainEx()
             //wgl.WglDXSetResourceShareHandleNV()
-            if (!wgl.WglDXSetResourceShareHandleNV(colorBuffer.NativePointer, colorBufferShareHandle))
+            if (!wgl.WglDXSetResourceShareHandleNV(sharedSurface.NativePointer, sharedSurfaceShareHandle))
             {
                 throw new Exception("failed wglDXSetResourceShareHandleNV");
             }
 
-            wglHandleColorBuffer = wgl.WglDXRegisterObjectNV(wglHandleDevice, colorBuffer.NativePointer, (uint)glColorBuffer, (uint)TextureTarget.Texture2D, WGL_NV_DX_interop.WGL_ACCESS_WRITE_DISCARD_NV);
-            singleWglHandleColorBufferArray = new IntPtr[] { wglHandleColorBuffer };
+            wglHandleSharedSurface = wgl.WglDXRegisterObjectNV(wglHandleDevice, sharedSurface.NativePointer, (uint)glSharedSurface, (uint)TextureTarget.Texture2D, WGL_NV_DX_interop.WGL_ACCESS_READ_WRITE_NV);
+            singleWglHandleSharedSurfaceArray = new IntPtr[] { wglHandleSharedSurface };
 
             //wgl.WglDXLockObjectsNV(wglHandleDevice, 1, singleWglHandleColorBufferArray);
 
+            GL.Enable(EnableCap.Texture2D); // <-- PROBABLY DON'T NEED THIS. MAY EVEN BE ACTIVELY HARMFUL.
             Console.WriteLine(GL.GetError());
             GL.BindFramebuffer(FramebufferTarget.Framebuffer, fbo);
             Console.WriteLine(GL.GetError());
-            GL.FramebufferTexture2D(FramebufferTarget.Framebuffer, FramebufferAttachment.ColorAttachment0, TextureTarget.Texture2D, glColorBuffer, 0);
+            GL.FramebufferTexture2D(FramebufferTarget.Framebuffer, FramebufferAttachment.ColorAttachment0, TextureTarget.Texture2D, glSharedSurface, 0);
             Console.WriteLine(GL.GetError());
             
             GL.DrawBuffer((DrawBufferMode)FramebufferAttachment.ColorAttachment0);
@@ -187,6 +192,9 @@ namespace sod.WPF
         {
             RenderingEventArgs args = (RenderingEventArgs)e;
 
+            if (new Random().Next(5) > 3)
+                return;
+
             // OnRender may be called twice in the same frame. Only render the first time.
             if (d3dImage.IsFrontBufferAvailable && lastRenderTime != args.RenderingTime)
             {
@@ -199,13 +207,12 @@ namespace sod.WPF
                 d3dImage.Lock();
                 d3dImage.SetBackBuffer(D3DResourceType.IDirect3DSurface9, colorBuffer.NativePointer);
 
-                // !!! DO RENDER? !!!
-                device.Clear(ClearFlags.Target, new SharpDX.ColorBGRA(1f, 1f, 0f, 1f), 0f, 0);
+                // DEBUG: Clear D3D device to yellow. OpenGL *should* (must, surely - we're copying a different texture!) overwrite.
+                //device.Clear(ClearFlags.Target, new SharpDX.ColorBGRA(1f, 1f, 0f, 1f), 0f, 0);
                 
-                device.Present();
 
                 makeCurrent();
-                wgl.WglDXLockObjectsNV(wglHandleDevice, 1, singleWglHandleColorBufferArray);
+                wgl.WglDXLockObjectsNV(wglHandleDevice, 1, singleWglHandleSharedSurfaceArray);
                 GL.Viewport(0, 0, 400, 300);
                 GL.MatrixMode(MatrixMode.Projection);
                 GL.LoadIdentity();
@@ -214,7 +221,7 @@ namespace sod.WPF
                 GL.MatrixMode(MatrixMode.Modelview);
                 GL.LoadIdentity();
                 GL.ClearColor(0f, 1f, 1f, 1f);
-                GL.Clear(ClearBufferMask.ColorBufferBit);
+                //GL.Clear(ClearBufferMask.ColorBufferBit);
                 GL.Begin(BeginMode.Triangles);
                 GL.Color3(127, 127, 127);
                 GL.Vertex2(100, 100);
@@ -227,8 +234,12 @@ namespace sod.WPF
                 //GL.Flush();
                 oglContext.SwapBuffers();
 
-                wgl.WglDXUnlockObjectsNV(wglHandleDevice, 1, singleWglHandleColorBufferArray);
+                wgl.WglDXUnlockObjectsNV(wglHandleDevice, 1, singleWglHandleSharedSurfaceArray);
                 release();
+
+                device.StretchRectangle(sharedSurface, colorBuffer, TextureFilter.Linear);
+
+                device.Present();
 
 
                 
