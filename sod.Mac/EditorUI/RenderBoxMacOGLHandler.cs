@@ -37,7 +37,7 @@ namespace sod.Mac
             GL.ClearColor (0, 0, 0, 0);
             GL.Clear(ClearBufferMask.ColorBufferBit);
 
-            //DrawTriangle ();
+            DrawTriangle ();
 
             GL.Flush ();
         }
