@@ -113,21 +113,13 @@
       <Project>{587d723b-36b2-49e2-9018-e3abd4b8bba6}</Project>
       <Name>SharpDX.WPF</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SharpGL\Core\SharpGL.SceneGraph\SharpGL.SceneGraph.csproj">
-      <Project>{47bcaa39-edad-4404-b6bd-4742b0abb523}</Project>
-      <Name>SharpGL.SceneGraph</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SharpGL\Core\SharpGL.WPF\SharpGL.WPF.csproj">
-      <Project>{53e67055-13d2-4467-bb57-79589afac2cd}</Project>
-      <Name>SharpGL.WPF</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SharpGL\Core\SharpGL\SharpGL.csproj">
-      <Project>{5ef45533-e2c7-46f2-b4a3-b8f36cd406e0}</Project>
-      <Name>SharpGL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\sod.D3D11\sod.D3D11.csproj">
       <Project>{8b3f69ce-6133-4244-a6fc-26421c3671ca}</Project>
       <Name>sod.D3D11</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\sod.OpenGL\sod.OpenGL.csproj">
+      <Project>{203c9517-3ad8-43b7-8766-24a205a32d66}</Project>
+      <Name>sod.OpenGL</Name>
     </ProjectReference>
     <ProjectReference Include="..\sod.XInput\sod.XInput.csproj">
       <Project>{ea3013d6-a1fb-4bb8-9a85-eb0d04c3bc65}</Project>

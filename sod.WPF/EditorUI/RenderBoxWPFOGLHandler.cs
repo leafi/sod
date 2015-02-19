@@ -18,6 +18,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows;
 using SharpDX.Direct3D9;
+using sod.OpenGL;
 
 namespace sod.WPF
 {
@@ -51,6 +52,8 @@ namespace sod.WPF
         INativeWindow nw;
 
         D3DImage d3dImage;
+
+        SimpleOGL renderer;
 
         private void createHiddenContext()
         {
@@ -160,6 +163,7 @@ namespace sod.WPF
 
             makeCurrent();
             oglContext.LoadAll();
+            renderer = new SimpleOGL();
             nw.ProcessEvents();
 
             createD3D9ExContext(); // needs OGL context set
@@ -200,24 +204,7 @@ namespace sod.WPF
 
                 makeCurrent();
                 wgl.WglDXLockObjectsNV(wglHandleDevice, 1, singleWglHandleSharedSurfaceArray);
-                GL.Viewport(0, 0, 400, 300);
-                GL.MatrixMode(MatrixMode.Projection);
-                GL.LoadIdentity();
-                GL.Ortho(0, 400, 300, 0, -1, 1);
-                GL.Disable(EnableCap.DepthTest);
-                GL.MatrixMode(MatrixMode.Modelview);
-                GL.LoadIdentity();
-                GL.ClearColor(0f, 1f, 1f, 1f);
-                GL.Clear(ClearBufferMask.ColorBufferBit);
-                GL.Begin(BeginMode.Triangles);
-                GL.Color3(127, 127, 127);
-                GL.Vertex2(100, 100);
-                GL.Vertex2(100, 200);
-                GL.Vertex2(0, 200);
-                GL.Vertex2(100, 100);
-                GL.Vertex2(100, 200);
-                GL.Vertex2(200, 200);
-                GL.Finish();
+                renderer.Render();
                 //GL.Flush();
                 oglContext.SwapBuffers();
 
