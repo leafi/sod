@@ -5,6 +5,8 @@ sod/bin/
 sod/obj/
 sod.Mac/bin/
 sod.Mac/obj/
+sod.OpenGL/bin/
+sod.OpenGL/obj/
 packages/
 SharpDX.WPF/bin/
 SharpDX.WPF/obj/
