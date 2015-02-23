@@ -36,6 +36,7 @@
   <ItemGroup>
     <Compile Include="SimpleOGL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TileLayer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
